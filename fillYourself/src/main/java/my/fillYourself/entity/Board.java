@@ -1,13 +1,17 @@
 package my.fillYourself.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class Board {
+@Builder
+public class Board extends BaseEntity {
 
     @Id
     @Column(name = "board_ID")
