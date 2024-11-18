@@ -10,6 +10,8 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/board")
@@ -19,7 +21,7 @@ public class BoardController {
     @PostMapping("/new")
     public ResponseEntity<BoardResponseDto> createBoard(@RequestBody BoardRequestDto dto){
         Board board = boardService.makeBoard(dto);
-        BoardResponseDto response = BoardConverter.returnBoardResponseDtoAtController(board);
+        BoardResponseDto response = BoardConverter.returnBoardResponseDto(board);
         return ResponseEntity.ok(response);
     }
 
@@ -27,7 +29,7 @@ public class BoardController {
     public ResponseEntity<BoardResponseDto> updateBoard(@PathVariable Long id, @RequestBody BoardRequestDto dto){
         try{
             Board board = boardService.updateBoard(id, dto);
-            BoardResponseDto response = BoardConverter.returnBoardResponseDtoAtController(board);
+            BoardResponseDto response = BoardConverter.returnBoardResponseDto(board);
             return ResponseEntity.ok(response);
         } catch (Exception e){
             return ResponseEntity.badRequest()
@@ -43,7 +45,7 @@ public class BoardController {
     @GetMapping("/{id}")
     public ResponseEntity<BoardResponseDto> getBoard(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(BoardConverter.returnBoardResponseDtoAtController(boardService.getBoard(id)));
+            return ResponseEntity.ok(BoardConverter.returnBoardResponseDto(boardService.getBoard(id)));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(
                     BoardResponseDto.builder()
@@ -53,5 +55,11 @@ public class BoardController {
                     .build()
             );
         }
+    }
+
+    @GetMapping("/all")
+    public List<BoardResponseDto> getAllBoard(){
+        List<Board> boards = boardService.getBoards();
+        return BoardConverter.returnBoardResponseDtoList(boards);
     }
 }
