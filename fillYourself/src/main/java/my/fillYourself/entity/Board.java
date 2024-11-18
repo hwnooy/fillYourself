@@ -24,4 +24,17 @@ public class Board extends BaseEntity {
     @Column
     private String content;
 
+    public void updateTitle(String title){
+        if (title == null || title.isBlank()){
+            throw new IllegalArgumentException("title cannot be null");
+        } else {
+            this.title=title;
+        }
+    }
+    public void updateContent(String content){
+        if (content != null) {
+            this.content=content;
+        }
+    }
+
 }

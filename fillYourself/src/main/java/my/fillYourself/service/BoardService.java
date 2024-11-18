@@ -24,4 +24,11 @@ public class BoardService {
     }
 
 
+    public Board updateBoard(Long id, BoardRequestDto dto) {
+        Board board = boardRepository.findById(id).orElseThrow();
+        board.updateTitle(dto.getTitle());
+        board.updateContent(dto.getContent());
+        boardRepository.save(board);
+        return board;
+    }
 }
