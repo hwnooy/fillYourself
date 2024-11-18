@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
-    // private final BoardConverter boardConverter;
-
 
     @PostMapping("/new")
-    public BoardResponseDto createBoard(@RequestBody BoardRequestDto dto){
+    public ResponseEntity<BoardResponseDto> createBoard(@RequestBody BoardRequestDto dto){
         Board board = boardService.makeBoard(dto);
-        return BoardConverter.returnBoardResponseDtoAtController(board);
+        BoardResponseDto response = BoardConverter.returnBoardResponseDtoAtController(board);
+        return ResponseEntity.ok(response);
 
     }
 }
