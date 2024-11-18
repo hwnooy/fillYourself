@@ -42,4 +42,10 @@ public class BoardService {
     public List<Board> getBoards(){
         return boardRepository.findAll();
     }
+
+    public void deleteBoard(Long id){
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Does Not Exist"));
+        boardRepository.delete(board);
+
+    }
 }

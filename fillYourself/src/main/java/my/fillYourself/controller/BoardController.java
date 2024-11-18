@@ -62,4 +62,14 @@ public class BoardController {
         List<Board> boards = boardService.getBoards();
         return BoardConverter.returnBoardResponseDtoList(boards);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBoard(@PathVariable Long id){
+        try{
+            boardService.deleteBoard(id);
+            return ResponseEntity.ok("Delete "+id);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
