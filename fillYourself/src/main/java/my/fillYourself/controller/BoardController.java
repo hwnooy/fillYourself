@@ -39,4 +39,19 @@ public class BoardController {
         }
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardResponseDto> getBoard(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(BoardConverter.returnBoardResponseDtoAtController(boardService.getBoard(id)));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(
+                    BoardResponseDto.builder()
+                            .id(id)
+                            .title(e.getMessage())
+                            .content("")
+                    .build()
+            );
+        }
+    }
 }

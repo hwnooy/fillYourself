@@ -6,6 +6,8 @@ import my.fillYourself.entity.Board;
 import my.fillYourself.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -30,5 +32,14 @@ public class BoardService {
         board.updateContent(dto.getContent());
         boardRepository.save(board);
         return board;
+    }
+
+
+    public Board getBoard(Long id){
+        return boardRepository.findById(id).orElseThrow();
+    }
+
+    public List<Board> getBoards(){
+        return boardRepository.findAll();
     }
 }
