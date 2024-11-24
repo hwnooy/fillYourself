@@ -1,11 +1,18 @@
 package my.fillYourself.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "comment")
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "comment")
+
 public class Comment extends BaseEntity{
 
     @Id

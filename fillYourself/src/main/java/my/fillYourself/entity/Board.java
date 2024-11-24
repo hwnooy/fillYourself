@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +26,9 @@ public class Board extends BaseEntity {
 
     @Column
     private String content;
+
+    @OneToMany
+    private List<Comment> comments;
 
     public void updateTitle(String title){
         if (title == null || title.isBlank()){
